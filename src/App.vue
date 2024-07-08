@@ -4,16 +4,15 @@
 	</header>
 
 	<main>
-		<q-btn @click="testConfirm">Confirm</q-btn>
+		<q-btn @click="quasarConfirm">Confirm Dialog plugin</q-btn>
 	</main>
 </template>
 
 <script setup lang="ts">
-import { useConfirmationDialog } from "@/useConfirmationDialog";
+import ConfirmationDialog from "./ConfirmationDialog.vue";
+import { useQuasar } from "quasar";
 
-const confirm = useConfirmationDialog();
+const $q = useQuasar();
 
-function testConfirm() {
-	confirm("Are you sure", "yes", "no").then((value) => alert(value));
-}
+const quasarConfirm = () => $q.dialog({ component: ConfirmationDialog });
 </script>
