@@ -4,16 +4,26 @@
 	</header>
 
 	<main>
-		<q-btn @click="testConfirm">Confirm</q-btn>
+		<q-btn @click="confirm">Confirm</q-btn>
 	</main>
+
+	<confirmation-dialog
+		title="test"
+		cancel-text="Cancel"
+		confirm-text="Confirm"
+		:on-cancelled="onCancelled"
+		:on-confirmed="onConfirmed"
+		ref="confirmationDialogRef"
+	/>
 </template>
 
 <script setup lang="ts">
-import { useConfirmationDialog } from "@/useConfirmationDialog";
+import ConfirmationDialog from "./ConfirmationDialog.vue";
+import { ref } from "vue";
 
-const confirm = useConfirmationDialog();
+const confirmationDialogRef = ref<typeof ConfirmationDialog>();
+const confirm = () => confirmationDialogRef.value?.open();
 
-function testConfirm() {
-	confirm("Are you sure", "yes", "no").then((value) => alert(value));
-}
+const onConfirmed = () => console.log("confirmed");
+const onCancelled = () => console.log("cancelled");
 </script>
