@@ -4,26 +4,15 @@
 	</header>
 
 	<main>
-		<q-btn @click="confirm">Confirm</q-btn>
+		<q-btn @click="quasarConfirm">Confirm Dialog plugin</q-btn>
 	</main>
-
-	<confirmation-dialog
-		title="test"
-		cancel-text="Cancel"
-		confirm-text="Confirm"
-		:on-cancelled="onCancelled"
-		:on-confirmed="onConfirmed"
-		ref="confirmationDialogRef"
-	/>
 </template>
 
 <script setup lang="ts">
 import ConfirmationDialog from "./ConfirmationDialog.vue";
-import { ref } from "vue";
+import { useQuasar } from "quasar";
 
-const confirmationDialogRef = ref<typeof ConfirmationDialog>();
-const confirm = () => confirmationDialogRef.value?.open();
+const $q = useQuasar();
 
-const onConfirmed = () => console.log("confirmed");
-const onCancelled = () => console.log("cancelled");
+const quasarConfirm = () => $q.dialog({ component: ConfirmationDialog });
 </script>
