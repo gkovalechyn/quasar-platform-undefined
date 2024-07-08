@@ -1,6 +1,7 @@
 import { DeferredPromise } from "@/DeferredPromise";
 import { h, render } from "vue";
 import ConfirmationDialog from "./ConfirmationDialog.vue";
+import appVueInstance from "./app";
 
 export function useConfirmationDialog() {
 	return function (title: string, confirmText: string, cancelText: string) {
@@ -23,7 +24,8 @@ export function useConfirmationDialog() {
 			}
 		});
 
-		render(renderedDialog, container);
+		const boundRender = render.bind(appVueInstance);
+		boundRender(renderedDialog, container);
 
 		if (renderedDialog.component && renderedDialog.component.exposed) {
 			renderedDialog.component.exposed.open(title, confirmText, cancelText);
